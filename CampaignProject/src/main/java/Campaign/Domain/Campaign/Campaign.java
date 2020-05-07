@@ -1,6 +1,7 @@
 package Campaign.Domain.Campaign;
 
 import Campaign.Domain.Budget.Budget;
+import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.User.User;
 import Campaign.Exception.CampaignFinishedException;
 import Campaign.Exception.CampaignPauseException;
@@ -19,9 +20,9 @@ public class Campaign {
 
     }
 
-    public void budgetReduction(double priceClick) {
+    public void budgetReduction(Click click) {
         campaignFinishedOrPause();
-        budget.budgetReduction(priceClick);
+        budget.budgetReduction(click);
         if(budget.budgetIsZero()){
             changeStatusCampaign(CampaignStatus.FINISHED);
         }

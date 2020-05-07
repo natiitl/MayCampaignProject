@@ -1,8 +1,8 @@
 import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Campaign.Campaign;
 import Campaign.*;
-import Campaign.Domain.Click;
-import Campaign.Domain.Premium;
+import Campaign.Domain.Clicks.Click;
+import Campaign.Domain.Clicks.Premium;
 
 import Campaign.Domain.User.User;
 import org.junit.jupiter.api.Test;
