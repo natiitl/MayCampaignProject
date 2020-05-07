@@ -47,6 +47,18 @@ public class ClickShould {
 
         assertEquals(true,clickB.differenceGreaterFifteenSeconds(clickC));
 
+    }
+    @Test
+    public void check_that_the_difference_between_clicks_is_not_greater_than_fifteen_seconds() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd hh:mm:ss");
+        parseDate = dateFormat.parse("2020-07-27 20:50:44");
+        parseDate2 = dateFormat.parse("2020-07-27 20:50:45");
+
+        Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
+        Click clickC = new Click(userID, Premium.PREMIUM, parseDate2);
+
+        assertEquals(false,clickB.differenceGreaterFifteenSeconds(clickC));
 
     }
 }
