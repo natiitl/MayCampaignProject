@@ -76,12 +76,17 @@ public class PaymentCampaignShould {
     }
 
     @Test
-    void check_charge_one_clicks_NO_premium_at_oneCampaign() {
+    public void check_charge_one_clicks_NO_premium_at_oneCampaign() {
         Click click = new Click(new UserID(), Premium.NO_PREMIUM, date);
 
         paymentCampaign.chargedForOneClick(campaign, click);
 
         assertEquals("8,99", budget.toString());
+    }
+
+    @Test
+    public void test(){
+
     }
 
 }

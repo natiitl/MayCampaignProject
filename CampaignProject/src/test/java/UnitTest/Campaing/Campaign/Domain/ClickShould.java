@@ -58,7 +58,7 @@ public class ClickShould {
         Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
         Click clickC = new Click(userID, Premium.PREMIUM, parseDate2);
 
-        assertEquals(false,clickB.differenceGreaterFifteenSeconds(clickC));
+        assertEquals(false,clickC.differenceGreaterFifteenSeconds(clickB));
 
     }
 }

@@ -28,6 +28,11 @@ public class ClickRepository {
        return clickList.get(clickList.size()-1).differenceGreaterFifteenSeconds(newClick);
 
     }
+    public void chargedIn(Budget budget) {
+        for (Click click:clickList) {
+            budget.budgetReduction(click);
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -42,9 +47,5 @@ public class ClickRepository {
         return Objects.hash(clickList);
     }
 
-    public void chargedIn(Budget budget) {
-        for (Click click:clickList) {
-            budget.budgetReduction(click);
-        }
-    }
+
 }

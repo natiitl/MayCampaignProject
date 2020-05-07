@@ -1,14 +1,12 @@
 package Campaign.Domain.Clicks;
 
 import Campaign.Domain.User.UserID;
-
-import java.text.ParseException;
 import java.util.Date;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
+
 
 public class Click {
-    private  int idClick;
+    private int idClick;
     private final UserID userID;
     private final Premium premium;
     private Date date;
@@ -28,13 +26,15 @@ public class Click {
 
     public boolean differenceGreaterFifteenSeconds(Click click) {
         long diff = date.getTime() - click.date.getTime();
-        long diffSeconds = Math.abs(TimeUnit.SECONDS.toSeconds(diff));
-        if(diffSeconds<=15){
+        if (diff != 0) {
+            diff = diff / 1000;
+        }
+        if (Math.abs(diff) <= 15) {
             return false;
         }
         return true;
 
-        }
+    }
 
     @Override
     public boolean equals(Object o) {
