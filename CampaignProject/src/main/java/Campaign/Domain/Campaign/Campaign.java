@@ -6,6 +6,8 @@ import Campaign.Domain.User.UserID;
 import Campaign.Exception.CampaignFinishedException;
 import Campaign.Exception.CampaignPauseException;
 
+import java.util.Objects;
+
 public class Campaign {
     private int idCampaign;
     private UserID userID;
@@ -37,6 +39,22 @@ public class Campaign {
 
     }
     public void changeStatusCampaign(CampaignStatus campaignStatus){
+        if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
+            throw new CampaignFinishedException("This campaign is finished.");
+        }
         this.campaignStatus = campaignStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Campaign campaign = (Campaign) o;
+        return idCampaign == campaign.idCampaign;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCampaign);
     }
 }
