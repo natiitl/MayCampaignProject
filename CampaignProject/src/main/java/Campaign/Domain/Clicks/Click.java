@@ -28,7 +28,7 @@ public class Click {
 
     public boolean differenceGreaterFifteenSeconds(Click click) {
         long diff = date.getTime() - click.date.getTime();
-        long diffSeconds = TimeUnit.SECONDS.toSeconds(diff);
+        long diffSeconds = Math.abs(TimeUnit.SECONDS.toSeconds(diff));
         if(diffSeconds<=15){
             return false;
         }

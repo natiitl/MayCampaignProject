@@ -3,11 +3,13 @@ package UnitTest.Campaing.Campaign.Domain;
 import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Campaign.Campaign;
 import Campaign.Domain.Campaign.CampaignStatus;
+import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Domain.User.UserID;
 import Campaign.Exception.CampaignFinishedException;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.mockito.Mock;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,6 +19,11 @@ public class CampaignShould {
     CustomerID customerID;
     Budget budget;
     Campaign campaignA;
+
+    @Mock
+    ClickRepository clickRepository;
+
+
 
     @BeforeEach
     public void init() {

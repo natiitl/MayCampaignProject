@@ -1,11 +1,22 @@
 package Campaign.Domain.Ad;
 
-import Campaign.Domain.Clicks.ClicksList;
+import Campaign.Domain.Budget.Budget;
+import Campaign.Domain.Clicks.Click;
+import Campaign.Domain.Clicks.ClickRepository;
 
 public class Ad {
-    private ClicksList clicksListForCharged;
+    private ClickRepository clickRepositoryForCharged;
 
     public Ad() {
-        this.clicksListForCharged = new ClicksList();
+
+        this.clickRepositoryForCharged = new ClickRepository();
+    }
+
+    public void addClick(Click click){
+        clickRepositoryForCharged.add(click);
+    }
+
+    public void chargedAt(Budget budget) {
+        clickRepositoryForCharged.chargedIn(budget);
     }
 }

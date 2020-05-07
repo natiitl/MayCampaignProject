@@ -8,10 +8,8 @@ import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.Premium;
 
 import Campaign.Domain.User.UserID;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,8 +36,8 @@ public class ChargeForClickCampaignAcceptanceShould {
 
         PaymentCampaign paymentCampaign = new PaymentCampaign();
 
-        paymentCampaign.chargefor(campaign,clickPremium);
-        paymentCampaign.chargefor(campaign,clickNoPremium);
+        paymentCampaign.chargedForOneClick(campaign,clickPremium);
+        paymentCampaign.chargedForOneClick(campaign,clickNoPremium);
 
         assertEquals("1,94",budget.toString());
 

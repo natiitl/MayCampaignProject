@@ -3,6 +3,7 @@ package UnitTest.Campaing.Campaign.Domain;
 import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Campaign.Campaign;
 import Campaign.Domain.Campaign.CampaignStatus;
+import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.Premium;
@@ -27,21 +28,20 @@ public class PaymentCampaignShould {
     PaymentCampaign paymentCampaign;
     Budget budget;
     UserID userID;
-
-    Timestamp timestamp;
-    Date parsedTimeStamp ;
+    Date date;
+    Date date2;
 
 
     @BeforeEach
     public void init() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd hh:mm:ss:SSS");
-        parsedTimeStamp = dateFormat.parse("2020-07-23 20:56:44:080");
+        date = dateFormat.parse("2020-07-23 20:56:44:080");
+        date2 = dateFormat.parse("2020-07-23 20:57:44:080");
 
-        timestamp = new Timestamp(parsedTimeStamp.getTime());
 
         userID = new UserID();
-        clickA = new Click(userID, Premium.PREMIUM,parsedTimeStamp);
+        clickA = new Click(userID, Premium.PREMIUM, date);
         budget = new Budget(9);
         campaign = new Campaign(new CustomerID(), budget);
         paymentCampaign = new PaymentCampaign();
@@ -49,38 +49,39 @@ public class PaymentCampaignShould {
 
     @Test
     public void raise_error_when_campaign_status_is_finished() {
-        Click click = new Click(new UserID(), Premium.PREMIUM,parsedTimeStamp);
+        Click click = new Click(new UserID(), Premium.PREMIUM, date);
 
         campaign.changeStatusCampaign(CampaignStatus.FINISHED);
 
-        assertThrows(CampaignFinishedException.class, () -> paymentCampaign.chargefor(campaign, click));
+        assertThrows(CampaignFinishedException.class, () -> paymentCampaign.chargedForOneClick(campaign, click));
     }
 
     @Test
     public void raise_error_when_campaign_status_is_pause() {
-        Click click = new Click(new UserID(), Premium.PREMIUM,parsedTimeStamp );
+        Click click = new Click(new UserID(), Premium.PREMIUM, date);
 
         campaign.changeStatusCampaign(CampaignStatus.PAUSE);
 
-        assertThrows(CampaignPauseException.class, () -> paymentCampaign.chargefor(campaign, click));
+        assertThrows(CampaignPauseException.class, () -> paymentCampaign.chargedForOneClick(campaign, click));
     }
 
     @Test
     public void check_charge_two_clicks_premiums_at_one_campaign() {
-        Click click = new Click(new UserID(), Premium.PREMIUM,parsedTimeStamp);
+        Click click = new Click(new UserID(), Premium.PREMIUM, date);
 
-        paymentCampaign.chargefor(campaign, click);
-        paymentCampaign.chargefor(campaign, click);
+        paymentCampaign.chargedForOneClick(campaign, click);
+        paymentCampaign.chargedForOneClick(campaign, click);
 
         assertEquals("8,90", budget.toString());
     }
 
     @Test
     void check_charge_one_clicks_NO_premium_at_oneCampaign() {
-        Click click = new Click(new UserID(), Premium.NO_PREMIUM,parsedTimeStamp);
+        Click click = new Click(new UserID(), Premium.NO_PREMIUM, date);
 
-        paymentCampaign.chargefor(campaign, click);
+        paymentCampaign.chargedForOneClick(campaign, click);
 
         assertEquals("8,99", budget.toString());
     }
+
 }
