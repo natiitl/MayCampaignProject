@@ -1,5 +1,5 @@
 package Campaign.Domain.User;
 
-public class User {
+public class UserID {
     private int idUser;
 }

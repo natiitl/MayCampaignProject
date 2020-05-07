@@ -8,7 +8,7 @@ import Campaign.Domain.Clicks.Premium;
 import Campaign.Exception.CampaignFinishedException;
 import Campaign.Exception.CampaignPauseException;
 import Campaign.PaymentCampaign;
-import Campaign.Domain.User.User;
+import Campaign.Domain.User.UserID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,13 +24,13 @@ public class PaymentCampaignShould {
     @BeforeEach
     public void init() {
         budget = new Budget(9);
-        campaign = new Campaign(new User(), budget);
+        campaign = new Campaign(new UserID(), budget);
         paymentCampaign = new PaymentCampaign();
     }
 
     @Test
     public void raise_error_when_campaign_status_is_finished() {
-        Click click = new Click(new User(), Premium.PREMIUM);
+        Click click = new Click(new UserID(), Premium.PREMIUM);
 
         campaign.changeStatusCampaign(CampaignStatus.FINISHED);
 
@@ -39,7 +39,7 @@ public class PaymentCampaignShould {
 
     @Test
     public void raise_error_when_campaign_status_is_pause() {
-        Click click = new Click(new User(), Premium.PREMIUM);
+        Click click = new Click(new UserID(), Premium.PREMIUM);
 
         campaign.changeStatusCampaign(CampaignStatus.PAUSE);
 
@@ -48,7 +48,7 @@ public class PaymentCampaignShould {
 
     @Test
     public void check_charge_two_clicks_premiums_at_one_campaign() {
-        Click click = new Click(new User(), Premium.PREMIUM);
+        Click click = new Click(new UserID(), Premium.PREMIUM);
 
         paymentCampaign.chargefor(campaign, click);
         paymentCampaign.chargefor(campaign, click);
@@ -58,7 +58,7 @@ public class PaymentCampaignShould {
 
     @Test
     void check_charge_one_clicks_NO_premium_at_oneCampaign() {
-        Click click = new Click(new User(), Premium.NO_PREMIUM);
+        Click click = new Click(new UserID(), Premium.NO_PREMIUM);
 
         paymentCampaign.chargefor(campaign, click);
 

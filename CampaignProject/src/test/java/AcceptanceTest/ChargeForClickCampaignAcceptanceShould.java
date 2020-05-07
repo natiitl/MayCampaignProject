@@ -6,7 +6,7 @@ import Campaign.*;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.Premium;
 
-import Campaign.Domain.User.User;
+import Campaign.Domain.User.UserID;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,11 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ChargeForClickCampaignAcceptanceShould {
     @Test
     public void ChargeForClickCampaignAcceptance(){
-        User user = new User();
-        Click clickPremium = new Click(user, Premium.PREMIUM);
-        Click clickNoPremium = new Click(user, Premium.NO_PREMIUM);
+        UserID userID = new UserID();
+
+        Click clickPremium = new Click(userID, Premium.PREMIUM);
+        Click clickNoPremium = new Click(userID, Premium.NO_PREMIUM);
+
         Budget budget = new Budget(2);
-        Campaign campaign = new Campaign(user,budget);
+        Campaign campaign = new Campaign(userID,budget);
+
         PaymentCampaign paymentCampaign = new PaymentCampaign();
 
         paymentCampaign.chargefor(campaign,clickPremium);
