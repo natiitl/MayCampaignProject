@@ -2,7 +2,7 @@ package Campaign.Domain.Campaign;
 
 import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Clicks.Click;
-import Campaign.Domain.User.UserID;
+import Campaign.Domain.Client.CustomerID;
 import Campaign.Exception.CampaignFinishedException;
 import Campaign.Exception.CampaignPauseException;
 
@@ -10,12 +10,12 @@ import java.util.Objects;
 
 public class Campaign {
     private int idCampaign;
-    private ClientID clientID;
+    private CustomerID customerID;
     private Budget budget;
     private CampaignStatus campaignStatus;
 
-    public Campaign(ClientID clientID, Budget budget) {
-        this.clientID = clientID;
+    public Campaign(CustomerID customerID, Budget budget) {
+        this.customerID = customerID;
         this.budget = budget;
         this.campaignStatus = CampaignStatus.ACTIVE;
         this.idCampaign++;

@@ -9,23 +9,4 @@ public enum CampaignStatus {
     PAUSE,
     FINISHED;
 
-    public static class CampaignList {
-        List<Campaign> campaignList = new ArrayList<>();
-        public void add(Campaign campaign) {
-            campaignList.add(campaign);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            CampaignList that = (CampaignList) o;
-            return Objects.equals(campaignList, that.campaignList);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(campaignList);
-        }
-    }
 }
