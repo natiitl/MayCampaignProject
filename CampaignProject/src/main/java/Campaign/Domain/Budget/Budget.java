@@ -7,11 +7,16 @@ public class Budget {
     }
 
     public void budgetReduction(double priceClick) {
-        budget -=priceClick;
+        this.budget -=priceClick;
 
     }
 
     public boolean budgetIsZero() {
         return budget==0;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%.2f",budget);
     }
 }

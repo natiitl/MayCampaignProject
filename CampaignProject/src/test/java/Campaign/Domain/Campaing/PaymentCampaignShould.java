@@ -11,9 +11,12 @@ import Campaign.PaymentCampaign;
 import Campaign.Domain.User.User;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PaymentCampaignShould {
+
+
     @Test
     public void raise_error_when_campaign_status_is_finished(){
 
@@ -33,5 +36,17 @@ public class PaymentCampaignShould {
         campaign.changeStatusCampaign(CampaignStatus.PAUSE);
 
         assertThrows(CampaignPauseException.class, ()->paymentCampaign.chargefor(campaign,click));
+    }
+    @Test
+    public void check_charge_two_clicks_premiums_at_one_campaign(){
+        Click click = new Click(new User(), Premium.PREMIUM);
+        Budget budget = new Budget(9);
+        Campaign campaign = new Campaign(new User(),budget);
+        PaymentCampaign paymentCampaign = new PaymentCampaign();
+
+        paymentCampaign.chargefor(campaign,click);
+        paymentCampaign.chargefor(campaign,click);
+
+        assertEquals("8,90",budget.toString());
     }
 }
