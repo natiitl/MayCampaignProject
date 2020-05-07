@@ -1,4 +1,4 @@
-package Campaign.Domain.Campaing;
+package UnitTest.Campaing.Campaign.Domain;
 
 import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Campaign.Campaign;
@@ -9,7 +9,6 @@ import Campaign.Exception.CampaignFinishedException;
 import Campaign.Exception.CampaignPauseException;
 import Campaign.PaymentCampaign;
 import Campaign.Domain.User.User;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
