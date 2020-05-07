@@ -12,10 +12,12 @@ public class ClicksList {
 
 
     public void add(Click newClick) {
-        for (Click click : clickList) {
-
-        }
         clickList.add(newClick);
+    }
+    private void compareTimestamps(Click newClick){
+       // return newClick.compareTimes(clickList.get(clickList.size()));
+
+
     }
 
 }
