@@ -1,5 +1,6 @@
 package UnitTest.Campaing.Campaign.Domain;
 
+import Campaign.Domain.Ad.Ad;
 import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Campaign.Campaign;
 import Campaign.Domain.Campaign.CampaignStatus;
@@ -35,9 +36,9 @@ public class PaymentCampaignShould {
     @BeforeEach
     public void init() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd hh:mm:ss:SSS");
-        date = dateFormat.parse("2020-07-23 20:56:44:080");
-        date2 = dateFormat.parse("2020-07-23 20:57:44:080");
+                "yyyy-MM-dd hh:mm:ss");
+        date = dateFormat.parse("2020-07-23 20:56:44");
+        date2 = dateFormat.parse("2020-07-23 20:57:44");
 
 
         userID = new UserID();
@@ -85,7 +86,17 @@ public class PaymentCampaignShould {
     }
 
     @Test
-    public void test(){
+    public void check_charge_two_clicks_NO_premium_at_campaign_for_ad() {
+        Click click = new Click(new UserID(), Premium.NO_PREMIUM, date);
+        Click click2 = new Click(new UserID(), Premium.NO_PREMIUM, date2);
+        Ad ad = new Ad();
+
+        ad.addClick(click);
+        ad.addClick(click2);
+
+        paymentCampaign.chargedFor(campaign,ad);
+
+        assertEquals("8,98",budget.toString());
 
     }
 
