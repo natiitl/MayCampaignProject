@@ -3,6 +3,7 @@ package UnitTest.Campaing.Campaign.Domain;
 import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Campaign.Campaign;
 import Campaign.Domain.Campaign.CampaignStatus;
+import Campaign.Domain.Campaign.ClientID;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.Premium;
 import Campaign.Exception.CampaignFinishedException;
@@ -24,7 +25,7 @@ public class PaymentCampaignShould {
     @BeforeEach
     public void init() {
         budget = new Budget(9);
-        campaign = new Campaign(new UserID(), budget);
+        campaign = new Campaign(new ClientID(), budget);
         paymentCampaign = new PaymentCampaign();
     }
 

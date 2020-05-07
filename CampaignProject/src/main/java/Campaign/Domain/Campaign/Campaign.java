@@ -10,12 +10,12 @@ import java.util.Objects;
 
 public class Campaign {
     private int idCampaign;
-    private UserID userID;
+    private ClientID clientID;
     private Budget budget;
     private CampaignStatus campaignStatus;
 
-    public Campaign(UserID userID, Budget budget) {
-        this.userID = userID;
+    public Campaign(ClientID clientID, Budget budget) {
+        this.clientID = clientID;
         this.budget = budget;
         this.campaignStatus = CampaignStatus.ACTIVE;
         this.idCampaign++;

@@ -14,7 +14,7 @@ public class Budget {
     }
 
     public boolean budgetIsZero() {
-        return budget==0;
+        return budget<=0 ;
     }
 
     @Override

@@ -3,6 +3,7 @@ package AcceptanceTest;
 import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Campaign.Campaign;
 import Campaign.*;
+import Campaign.Domain.Campaign.ClientID;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.Premium;
 
@@ -15,12 +16,13 @@ public class ChargeForClickCampaignAcceptanceShould {
     @Test
     public void ChargeForClickCampaignAcceptance(){
         UserID userID = new UserID();
+        ClientID clientID = new ClientID();
 
         Click clickPremium = new Click(userID, Premium.PREMIUM);
         Click clickNoPremium = new Click(userID, Premium.NO_PREMIUM);
 
         Budget budget = new Budget(2);
-        Campaign campaign = new Campaign(userID,budget);
+        Campaign campaign = new Campaign(clientID,budget);
 
         PaymentCampaign paymentCampaign = new PaymentCampaign();
 
