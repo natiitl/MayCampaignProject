@@ -1,5 +1,6 @@
 package Campaign.Domain.Campaign;
 
+import Campaign.Domain.Ad.AdList;
 import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Client.CustomerID;
@@ -13,12 +14,14 @@ public class Campaign {
     private CustomerID customerID;
     private Budget budget;
     private CampaignStatus campaignStatus;
+    private AdList adList;
 
     public Campaign(CustomerID customerID, Budget budget) {
         this.customerID = customerID;
         this.budget = budget;
         this.campaignStatus = CampaignStatus.ACTIVE;
         this.idCampaign++;
+        this.adList = new AdList();
 
     }
 

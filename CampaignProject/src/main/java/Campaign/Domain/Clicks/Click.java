@@ -4,7 +4,6 @@ import Campaign.Domain.User.UserID;
 import Campaign.Service.TimeServer;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Objects;
 
 public class Click {
@@ -12,12 +11,12 @@ public class Click {
     private final UserID userID;
     private final Premium premium;
     private Timestamp time;
-    private TimeServer timeServer = new TimeServer();
 
-    public Click(UserID userID, Premium premium) {
+
+    public Click(UserID userID, Premium premium, Timestamp timestamp) {
         this.userID = userID;
         this.premium = premium;
-        this.time = timeServer.getDate();
+        this.time = timestamp;
         this.idClick++;
     }
 
