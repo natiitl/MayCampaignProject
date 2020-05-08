@@ -73,7 +73,7 @@ public class ClickShould {
         userID = new UserID();
 
         Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
-        Click clickC = new Click(new UserID(), Premium.PREMIUM, parseDate2);
+        Click clickC = new Click(new UserID(), Premium.PREMIUM, parseDate);
 
         assertEquals(true,clickC.checkValidClick(clickB));
 

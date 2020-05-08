@@ -23,7 +23,7 @@ public class ClickRepository {
         if(clickList.size()==0){
             return true;
         }
-       return clickList.get(clickList.size()-1).differenceGreaterFifteenSeconds(newClick);
+       return clickList.get(clickList.size()-1).checkValidClick(newClick);
 
     }
 
