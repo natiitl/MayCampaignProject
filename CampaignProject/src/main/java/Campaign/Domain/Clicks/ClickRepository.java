@@ -30,7 +30,7 @@ public class ClickRepository {
     }
     public void chargedIn(Budget budget) {
         for (Click click:clickList) {
-            budget.budgetReduction(click);
+            budget.chargedFor(click);
         }
     }
 

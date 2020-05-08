@@ -5,7 +5,7 @@ import Campaign.Domain.Clicks.Click;
 
 
 public interface Campaign {
-    void budgetReduction(Click click);
+    void chargedFor(Click click);
 
     void campaignFinishedOrPause();
 

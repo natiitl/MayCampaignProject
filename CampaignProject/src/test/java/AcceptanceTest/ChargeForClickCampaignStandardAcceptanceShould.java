@@ -1,6 +1,6 @@
 package AcceptanceTest;
 
-import Campaign.Domain.Budget.Budget;
+import Campaign.Domain.Budget.BudgetStandard;
 import Campaign.Domain.Campaign.CampaignStandard;
 import Campaign.*;
 import Campaign.Domain.Client.CustomerID;
@@ -31,15 +31,15 @@ public class ChargeForClickCampaignStandardAcceptanceShould {
         Click clickPremium = new Click(userID, Premium.PREMIUM, parsedTimeStamp);
         Click clickNoPremium = new Click(userID, Premium.NO_PREMIUM,parsedTimeStamp);
 
-        Budget budget = new Budget(2);
-        CampaignStandard campaignStandard = new CampaignStandard(customerID,budget);
+        BudgetStandard budgetStandard = new BudgetStandard(2);
+        CampaignStandard campaignStandard = new CampaignStandard(customerID, budgetStandard);
 
         PaymentCampaign paymentCampaign = new PaymentCampaign();
 
         paymentCampaign.chargedForOneClick(campaignStandard,clickPremium);
         paymentCampaign.chargedForOneClick(campaignStandard,clickNoPremium);
 
-        assertEquals("1,94",budget.toString());
+        assertEquals("1,94", budgetStandard.toString());
 
 
 

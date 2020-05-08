@@ -1,7 +1,7 @@
 package Campaign.Domain.Campaign;
 
 import Campaign.Domain.Ad.Ad;
-import Campaign.Domain.Budget.Budget;
+import Campaign.Domain.Budget.BudgetStandard;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Exception.CampaignFinishedException;
@@ -12,22 +12,22 @@ import java.util.Objects;
 public class CampaignStandard implements Campaign {
     private int idCampaign;
     private CustomerID customerID;
-    private Budget budget;
+    private BudgetStandard budgetStandard;
     private CampaignStatus campaignStatus;
 
-    public CampaignStandard(CustomerID customerID, Budget budget) {
+    public CampaignStandard(CustomerID customerID, BudgetStandard budgetStandard) {
         this.customerID = customerID;
-        this.budget = budget;
+        this.budgetStandard = budgetStandard;
         this.campaignStatus = CampaignStatus.ACTIVE;
         this.idCampaign++;
 
     }
 
     @Override
-    public void budgetReduction(Click click) {
+    public void chargedFor(Click click) {
         campaignFinishedOrPause();
-        budget.budgetReduction(click);
-        if (budget.budgetIsZero()) {
+        budgetStandard.chargedFor(click);
+        if (budgetStandard.budgetIsZero()) {
             changeStatusToFinished();
         }
     }
@@ -73,7 +73,7 @@ public class CampaignStandard implements Campaign {
 
     @Override
     public void chargedFor(Ad ad) {
-        ad.chargedAt(budget);
+        ad.chargedAt(budgetStandard);
     }
 
     @Override

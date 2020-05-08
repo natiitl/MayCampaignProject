@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Click {
     private int idClick;
     private final UserID userID;
-    private final Premium premium;
+    private Premium premium;
     private Date date;
 
 
@@ -20,8 +20,11 @@ public class Click {
 
     }
 
-    public double priceClick() {
-        return premium.price;
+    public double priceTopClick() {
+        return premium.priceTop;
+    }
+    public double priceStandardClick() {
+        return premium.priceStandard;
     }
 
     public boolean differenceGreaterFifteenSeconds(Click click) {
@@ -34,6 +37,10 @@ public class Click {
         }
         return true;
 
+    }
+    public boolean isPremium(){
+
+        return this.premium.equals(Premium.PREMIUM);
     }
 
     @Override

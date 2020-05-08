@@ -1,6 +1,7 @@
 package Campaign.Domain.Ad;
 
 import Campaign.Domain.Budget.Budget;
+import Campaign.Domain.Budget.BudgetStandard;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.ClickRepository;
 

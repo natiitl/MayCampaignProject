@@ -1,8 +1,10 @@
 package UnitTest.Campaing.Campaign.Domain;
 
 import Campaign.Domain.Ad.Ad;
-import Campaign.Domain.Budget.Budget;
+import Campaign.Domain.Budget.BudgetStandard;
+import Campaign.Domain.Budget.BudgetTop;
 import Campaign.Domain.Campaign.CampaignStandard;
+import Campaign.Domain.Campaign.CampaignTop;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.Premium;
@@ -18,11 +20,13 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class PaymentCampaignStandardShould {
+public class PaymentCampaignShould {
     CampaignStandard campaignStandard;
+    CampaignTop campaignTop;
     Click clickA;
     PaymentCampaign paymentCampaign;
-    Budget budget;
+    BudgetStandard budgetStandard;
+    BudgetTop budgetTop;
     UserID userID;
     Date date;
     Date date2;
@@ -38,8 +42,10 @@ public class PaymentCampaignStandardShould {
 
         userID = new UserID();
         clickA = new Click(userID, Premium.PREMIUM, date);
-        budget = new Budget(9);
-        campaignStandard = new CampaignStandard(new CustomerID(), budget);
+        budgetStandard = new BudgetStandard(9);
+        budgetTop = new BudgetTop(9);
+        campaignStandard = new CampaignStandard(new CustomerID(), budgetStandard);
+        campaignTop = new CampaignTop(new CustomerID(), budgetTop);
         paymentCampaign = new PaymentCampaign();
     }
 
@@ -52,7 +58,7 @@ public class PaymentCampaignStandardShould {
         paymentCampaign.chargedForOneClick(campaignStandard, click);
         paymentCampaign.chargedForOneClick(campaignStandard, click);
 
-        assertEquals("8,90", budget.toString());
+        assertEquals("8,90", budgetStandard.toString());
     }
 
     @Test
@@ -61,7 +67,7 @@ public class PaymentCampaignStandardShould {
 
         paymentCampaign.chargedForOneClick(campaignStandard, click);
 
-        assertEquals("8,99", budget.toString());
+        assertEquals("8,99", budgetStandard.toString());
     }
 
     @Test
@@ -75,8 +81,28 @@ public class PaymentCampaignStandardShould {
 
         paymentCampaign.chargedFor(campaignStandard,ad);
 
-        assertEquals("8,98",budget.toString());
+        assertEquals("8,98", budgetStandard.toString());
 
     }
+    @Test
+    public void check_charge_two_clicks_premiums_at_one_campaign_top() {
+        Click click = new Click(new UserID(), Premium.PREMIUM, date);
+
+        paymentCampaign.chargedForOneClick(campaignTop, click);
+        paymentCampaign.chargedForOneClick(campaignTop, click);
+
+        assertEquals("8,60", budgetTop.toString());
+    }
+
+    @Test
+    public void check_charge_one_clicks_NO_premium_at_one_Campaign_yop() {
+        Click click = new Click(new UserID(), Premium.NO_PREMIUM, date);
+
+        paymentCampaign.chargedForOneClick(campaignTop, click);
+
+        assertEquals("8,90", budgetTop.toString());
+    }
+
+
 
 }

@@ -1,6 +1,6 @@
 package UnitTest.Campaing.Campaign.Domain;
 
-import Campaign.Domain.Budget.Budget;
+import Campaign.Domain.Budget.BudgetStandard;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Clicks.Premium;
@@ -43,9 +43,9 @@ public class ClickRepositoryShould {
         ClickRepository clickRepository = new ClickRepository();
         clickRepository.add(new Click(new UserID(), Premium.NO_PREMIUM, parseDate));
         clickRepository.add(new Click(new UserID(), Premium.PREMIUM, parseDate2));
-        Budget budget = new Budget(1);
-        clickRepository.chargedIn(budget);
+        BudgetStandard budgetStandard = new BudgetStandard(1);
+        clickRepository.chargedIn(budgetStandard);
 
-        assertEquals("0,94",budget.toString());
+        assertEquals("0,94", budgetStandard.toString());
     }
 }
