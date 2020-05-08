@@ -57,7 +57,7 @@ public class CampaignStandardShould {
     }
 
     @Test
-    public void test() throws ParseException {
+    public void check_that_fraudulent_clicks_are_returned_correctly() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd hh:mm:ss");
         Date date = dateFormat.parse("2020-07-27 20:50:44");
