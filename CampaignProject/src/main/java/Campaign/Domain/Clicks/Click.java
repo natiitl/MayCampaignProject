@@ -61,6 +61,6 @@ public class Click {
 
     public boolean checkValidClick(Click click) {
 
-        return !isSameUser(click)||differenceGreaterFifteenSeconds(click);
+        return !(isSameUser(click)&&!differenceGreaterFifteenSeconds(click));
     }
 }
