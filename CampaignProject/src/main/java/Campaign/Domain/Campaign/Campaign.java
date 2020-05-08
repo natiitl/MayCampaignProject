@@ -1,83 +1,23 @@
 package Campaign.Domain.Campaign;
 
 import Campaign.Domain.Ad.Ad;
-import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Clicks.Click;
-import Campaign.Domain.Client.CustomerID;
-import Campaign.Exception.CampaignFinishedException;
-import Campaign.Exception.CampaignPauseException;
 
-import java.util.Objects;
 
-public class Campaign {
-    private int idCampaign;
-    private CustomerID customerID;
-    private Budget budget;
-    private CampaignStatus campaignStatus;
+public interface Campaign {
+    void budgetReduction(Click click);
 
-    public Campaign(CustomerID customerID, Budget budget) {
-        this.customerID = customerID;
-        this.budget = budget;
-        this.campaignStatus = CampaignStatus.ACTIVE;
-        this.idCampaign++;
+    void campaignFinishedOrPause();
 
-    }
+    void changeStatusToFinished();
 
-    public void budgetReduction(Click click) {
-        campaignFinishedOrPause();
-        budget.budgetReduction(click);
-        if(budget.budgetIsZero()){
-            changeStatusToFinished();
-        }
-    }
-    public void campaignFinishedOrPause(){
-        if(campaignStatus.equals(CampaignStatus.FINISHED)){
-            throw new CampaignFinishedException("This campaign is finished");
-        }
-        if(campaignStatus.equals(CampaignStatus.PAUSE)){
-            throw new CampaignPauseException("This campaign is pause");
-        }
+    void changeStatusToPause();
 
-    }
-    /*public void changeStatusCampaign(CampaignStatus campaignStatus){
-        if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
-            throw new CampaignFinishedException("This campaign is finished.");
-        }
-        this.campaignStatus = campaignStatus;
-    }*/
+    void changeStatusToActive();
 
-    public void changeStatusToFinished(){
-        if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
-            throw new CampaignFinishedException("This campaign is finished.");
-        }
-        this.campaignStatus = CampaignStatus.FINISHED;
-    }
-    public void changeStatusToPause(){
-        if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
-            throw new CampaignFinishedException("This campaign is finished.");
-        }
-        this.campaignStatus = CampaignStatus.PAUSE;
-    }
-    public void changeStatusToActive(){
-        if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
-            throw new CampaignFinishedException("This campaign is finished.");
-        }
-        this.campaignStatus = CampaignStatus.ACTIVE;
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Campaign campaign = (Campaign) o;
-        return idCampaign == campaign.idCampaign;
-    }
+    boolean statusIsFinished();
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idCampaign);
-    }
+    boolean statusIsPause();
 
-    public void chargedFor(Ad ad) {
-        ad.chargedAt(budget);
-    }
+    void chargedFor(Ad ad);
 }

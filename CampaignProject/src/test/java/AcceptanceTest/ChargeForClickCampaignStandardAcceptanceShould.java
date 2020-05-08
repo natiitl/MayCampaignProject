@@ -1,7 +1,7 @@
 package AcceptanceTest;
 
 import Campaign.Domain.Budget.Budget;
-import Campaign.Domain.Campaign.Campaign;
+import Campaign.Domain.Campaign.CampaignStandard;
 import Campaign.*;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Domain.Clicks.Click;
@@ -16,7 +16,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ChargeForClickCampaignAcceptanceShould {
+public class ChargeForClickCampaignStandardAcceptanceShould {
 
     @Test
     public void ChargeForClickCampaignAcceptance() throws ParseException {
@@ -32,12 +32,12 @@ public class ChargeForClickCampaignAcceptanceShould {
         Click clickNoPremium = new Click(userID, Premium.NO_PREMIUM,parsedTimeStamp);
 
         Budget budget = new Budget(2);
-        Campaign campaign = new Campaign(customerID,budget);
+        CampaignStandard campaignStandard = new CampaignStandard(customerID,budget);
 
         PaymentCampaign paymentCampaign = new PaymentCampaign();
 
-        paymentCampaign.chargedForOneClick(campaign,clickPremium);
-        paymentCampaign.chargedForOneClick(campaign,clickNoPremium);
+        paymentCampaign.chargedForOneClick(campaignStandard,clickPremium);
+        paymentCampaign.chargedForOneClick(campaignStandard,clickNoPremium);
 
         assertEquals("1,94",budget.toString());
 
