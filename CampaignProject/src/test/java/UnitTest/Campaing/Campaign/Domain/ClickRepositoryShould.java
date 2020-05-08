@@ -4,6 +4,7 @@ import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Clicks.Premium;
 import Campaign.Domain.User.UserID;
+import Campaign.Domain.User.UserRepository;
 import org.junit.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +33,28 @@ public class ClickRepositoryShould {
         assertEquals(clickRepositoryExpected, clickRepositoryActual);
     }
 
+    @Test
+    public void check_if_find_fraudulentClicks_with_userlist_and_one_date() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd hh:mm:ss");
 
+
+        Date date = dateFormat.parse("2020-07-27 20:50:44");
+
+        UserRepository userRepository = new UserRepository();
+        UserID userID = new UserID();
+        userRepository.addUser(userID);
+        Click click = new Click(userID, Premium.PREMIUM, date);
+        ClickRepository  clickRepository = new ClickRepository();
+        clickRepository.add(click);
+
+        ClickRepository clickRepositoryActual = new ClickRepository();
+        clickRepositoryActual = clickRepository.findFraudulentClicks(userRepository,date);
+        ClickRepository clickRepositoryExpected = new ClickRepository();
+        clickRepositoryExpected.add(click);
+
+        assertEquals(clickRepositoryExpected,clickRepositoryActual);
+
+    }
 
 }

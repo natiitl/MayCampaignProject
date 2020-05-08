@@ -61,11 +61,14 @@ public class ClickRepository {
     }
 
     public ClickRepository findFraudulentClicks(UserRepository userRepository, Date date) {
+        ClickRepository clickRepositoryNEW = new ClickRepository();
         for (Click click: clickList) {
             click.dateIsEarlier(date);
-            userRepository.isMyClick(click,date);
+            if(userRepository.isMyClick(click,date)){
+                clickRepositoryNEW.add(click);
+            }
 
         }
-        return null;
+        return clickRepositoryNEW;
     }
 }

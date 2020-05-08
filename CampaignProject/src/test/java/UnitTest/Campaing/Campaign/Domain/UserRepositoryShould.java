@@ -12,12 +12,13 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class userRepositoryShould {
+public class UserRepositoryShould {
     @Test
     public void check_if_click_is_my_click() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd hh:mm:ss");
         Date date = dateFormat.parse("2020-07-27 20:50:44");
+        Date date2 = dateFormat.parse("2020-07-27 20:56:45");
         UserRepository userRepository = new UserRepository();
         UserID userID = new UserID();
         userRepository.addUser(userID);
