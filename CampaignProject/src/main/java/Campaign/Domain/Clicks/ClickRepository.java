@@ -55,4 +55,10 @@ public class ClickRepository {
         }
         return price;
     }
+
+    public void addClicksCharged(ClickRepository clickChargedList) {
+        for (Click click:clickChargedList.clickList) {
+            clickList.add(click);
+        }
+    }
 }

@@ -32,6 +32,22 @@ public class ClickRepositoryShould {
         assertEquals(clickRepositoryExpected, clickRepositoryActual);
     }
 
+    @Test
+    public void check_if_the_clicks_that_have_already_been_deducted_from_the_budget_are_added_correctly() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd hh:mm:ss");
+        Date parseDate = dateFormat.parse("2020-07-27 20:50:44");
+        UserID userID = new UserID();
 
+        Click clickA = new Click(userID, Premium.PREMIUM, parseDate);
+        ClickRepository clickRepositoryActual = new ClickRepository();
+        ClickRepository clickRepositoryClicksCharged = new ClickRepository();
+        ClickRepository clickRepositoryExpected = new ClickRepository();
+        clickRepositoryExpected.add(clickA);
+        clickRepositoryClicksCharged.add(clickA);
+        clickRepositoryActual.addClicksCharged(clickRepositoryClicksCharged);
+
+        assertEquals(clickRepositoryExpected, clickRepositoryActual);
+    }
 
 }

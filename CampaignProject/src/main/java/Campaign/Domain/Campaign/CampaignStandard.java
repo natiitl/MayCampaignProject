@@ -1,7 +1,6 @@
 package Campaign.Domain.Campaign;
 
 import Campaign.Domain.Budget.Budget;
-import Campaign.Domain.Budget.BudgetStandard;
 import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Exception.CampaignFinishedException;
@@ -14,11 +13,13 @@ public class CampaignStandard implements Campaign {
     private CustomerID customerID;
     private Budget budgetStandard;
     private CampaignStatus campaignStatus;
+    private ClickRepository clickChargedRepository;
 
     public CampaignStandard(CustomerID customerID, Budget budgetStandard) {
         this.customerID = customerID;
         this.budgetStandard = budgetStandard;
         this.campaignStatus = CampaignStatus.ACTIVE;
+        this.clickChargedRepository = new ClickRepository();
         this.idCampaign++;
 
     }
@@ -28,6 +29,8 @@ public class CampaignStandard implements Campaign {
     public void chargedFor(ClickRepository clickRepository) {
         campaignFinishedOrPause();
         budgetStandard.chargedFor(clickRepository);
+        clickChargedRepository.addClicksCharged(budgetStandard.clickChargedList());
+
         if (budgetStandard.budgetIsZero()) {
             changeStatusToFinished();
         }
