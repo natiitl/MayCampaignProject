@@ -107,4 +107,19 @@ public class ClickShould {
         assertEquals(true,clickC.checkValidClick(clickB));
 
     }
+    @Test
+    public void check_if_date_is_early_to_click() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd hh:mm:ss");
+        userID = new UserID();
+
+        parseDate = dateFormat.parse("2020-07-27 20:50:44");
+        parseDate2 = dateFormat.parse("2020-07-27 20:50:45");
+
+        Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
+
+
+        assertEquals(false,clickB.dateIsEarlier(parseDate2));
+
+    }
 }

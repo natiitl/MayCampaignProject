@@ -41,7 +41,7 @@ public class Click {
 
     }
 
-    private boolean isSameUser(Click click) {
+    public boolean isSameUser(Click click) {
         return this.userID.equals(click.userID);
     }
 
@@ -62,5 +62,17 @@ public class Click {
     public boolean checkValidClick(Click click) {
 
         return !(isSameUser(click)&&!differenceGreaterFifteenSeconds(click));
+    }
+
+    public boolean isSameUserID(UserID userID) {
+        return this.userID.equals(userID);
+    }
+
+    public boolean dateIsEarlier(Date date) {
+        long diff = date.getTime() - this.date.getTime();
+        if(diff<=0){
+            return true;
+        }
+        return false;
     }
 }

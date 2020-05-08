@@ -1,6 +1,9 @@
 package Campaign.Domain.Clicks;
 
+import Campaign.Domain.User.UserRepository;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +21,7 @@ public class ClickRepository {
         }
 
     }
+
     private boolean differenceGreaterFifteenSeconds(Click newClick){
 
         if(clickList.size()==0){
@@ -54,5 +58,14 @@ public class ClickRepository {
             price+=click.priceTopClick();
         }
         return price;
+    }
+
+    public ClickRepository findFraudulentClicks(UserRepository userRepository, Date date) {
+        for (Click click: clickList) {
+            click.dateIsEarlier(date);
+            userRepository.isMyClick(click,date);
+
+        }
+        return null;
     }
 }

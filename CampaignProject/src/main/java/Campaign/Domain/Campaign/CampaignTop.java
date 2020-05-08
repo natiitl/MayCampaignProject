@@ -6,9 +6,11 @@ import Campaign.Domain.Budget.BudgetTop;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
+import Campaign.Domain.User.UserRepository;
 import Campaign.Exception.CampaignFinishedException;
 import Campaign.Exception.CampaignPauseException;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class CampaignTop implements Campaign {
@@ -53,6 +55,11 @@ public class CampaignTop implements Campaign {
     @Override
     public boolean statusIsFinished() {
         return campaignStatus.equals(CampaignStatus.FINISHED);
+    }
+
+    @Override
+    public ClickRepository findFraudulentClicks(UserRepository userRepository, Date date) {
+        return null;
     }
 
     @Override
