@@ -1,7 +1,9 @@
 package Campaign.Domain.Campaign;
 
+
 import Campaign.Domain.Budget.Budget;
-import Campaign.Domain.Budget.BudgetStandard;
+import Campaign.Domain.Budget.BudgetTop;
+import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Exception.CampaignFinishedException;
@@ -9,15 +11,15 @@ import Campaign.Exception.CampaignPauseException;
 
 import java.util.Objects;
 
-public class CampaignStandard implements Campaign {
+public class CampaignTop implements Campaign {
     private int idCampaign;
     private CustomerID customerID;
-    private Budget budgetStandard;
+    private Budget budgetTop;
     private CampaignStatus campaignStatus;
 
-    public CampaignStandard(CustomerID customerID, Budget budgetStandard) {
+    public CampaignTop(CustomerID customerID, Budget budgetTop) {
         this.customerID = customerID;
-        this.budgetStandard = budgetStandard;
+        this.budgetTop = budgetTop;
         this.campaignStatus = CampaignStatus.ACTIVE;
         this.idCampaign++;
 
@@ -27,8 +29,8 @@ public class CampaignStandard implements Campaign {
     @Override
     public void chargedFor(ClickRepository clickRepository) {
         campaignFinishedOrPause();
-        budgetStandard.chargedFor(clickRepository);
-        if (budgetStandard.budgetIsZero()) {
+        budgetTop.chargedFor(clickRepository);
+        if (budgetTop.budgetIsZero()) {
             changeStatusToFinished();
         }
     }
@@ -72,7 +74,6 @@ public class CampaignStandard implements Campaign {
         this.campaignStatus = CampaignStatus.ACTIVE;
     }
 
-
     @Override
     public boolean statusIsPause() {
         return campaignStatus.equals(CampaignStatus.PAUSE);
@@ -82,7 +83,7 @@ public class CampaignStandard implements Campaign {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CampaignStandard campaignStandard = (CampaignStandard) o;
+        CampaignTop campaignStandard = (CampaignTop) o;
         return idCampaign == campaignStandard.idCampaign;
     }
 

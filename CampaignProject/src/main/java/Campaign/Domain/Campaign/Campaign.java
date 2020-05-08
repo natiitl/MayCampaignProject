@@ -1,11 +1,11 @@
 package Campaign.Domain.Campaign;
 
-import Campaign.Domain.Ad.Ad;
-import Campaign.Domain.Clicks.Click;
+import Campaign.Domain.Clicks.ClickRepository;
 
 
 public interface Campaign {
-    void budgetReduction(Click click);
+
+    void chargedFor(ClickRepository clickRepository);
 
     void campaignFinishedOrPause();
 
@@ -19,5 +19,4 @@ public interface Campaign {
 
     boolean statusIsPause();
 
-    void chargedFor(Ad ad);
 }

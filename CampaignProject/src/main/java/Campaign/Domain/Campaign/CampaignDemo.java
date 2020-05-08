@@ -1,8 +1,9 @@
 package Campaign.Domain.Campaign;
 
-import Campaign.Domain.Ad.Ad;
 import Campaign.Domain.Budget.Budget;
-import Campaign.Domain.Clicks.Click;
+import Campaign.Domain.Budget.BudgetStandard;
+
+import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Exception.CampaignFinishedException;
 import Campaign.Exception.CampaignPauseException;
@@ -12,20 +13,21 @@ import java.util.Objects;
 public class CampaignDemo implements Campaign {
     private int idCampaign;
     private CustomerID customerID;
-    private Budget budget;
     private CampaignStatus campaignStatus;
+    private Budget budget;
 
-    public CampaignDemo(CustomerID customerID, Budget budget) {
+    public CampaignDemo(CustomerID customerID,Budget budget) {
         this.customerID = customerID;
-        this.budget = budget;
         this.campaignStatus = CampaignStatus.ACTIVE;
         this.idCampaign++;
+        this.budget = budget;
 
     }
 
+
     @Override
-    public void budgetReduction(Click click) {
-        campaignFinishedOrPause();
+    public void chargedFor(ClickRepository clickRepository) {
+
     }
 
     @Override
@@ -69,14 +71,10 @@ public class CampaignDemo implements Campaign {
     }
 
     @Override
-    public void chargedFor(Ad ad) {
-        ad.chargedAt(budget);
-    }
-
-    @Override
     public boolean statusIsPause() {
         return campaignStatus.equals(CampaignStatus.PAUSE);
     }
+
 
     @Override
     public boolean equals(Object o) {

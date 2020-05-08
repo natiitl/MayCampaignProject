@@ -1,25 +1,20 @@
 package Campaign.Domain.Budget;
 
-import Campaign.Domain.Clicks.Click;
+import Campaign.Domain.Clicks.ClickRepository;
 
-public class Budget {
+public abstract class Budget {
     private double budget;
 
-    public Budget(double budget) {
+    public double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(double budget) {
         this.budget = budget;
     }
 
-    public void budgetReduction(Click click) {
-        this.budget -=click.priceClick();
 
-    }
+    public abstract void chargedFor(ClickRepository clickRepository);
 
-    public boolean budgetIsZero() {
-        return budget<=0 ;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%.2f",budget);
-    }
+    public abstract boolean budgetIsZero();
 }

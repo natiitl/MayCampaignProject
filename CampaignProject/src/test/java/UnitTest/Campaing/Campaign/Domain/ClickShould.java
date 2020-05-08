@@ -25,12 +25,12 @@ public class ClickShould {
         parseDate = dateFormat.parse("2020-07-27 20:50:44");
         parseDate2 = dateFormat.parse("2020-07-23 20:56:80");
 
-        userID = new UserID();
         clickA = new Click(userID, Premium.PREMIUM,parseDate);
 
     }
     @Test
     public void check_that_two_clicks_do_not_have_the_same_id(){
+        userID = new UserID();
         Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
 
         assertEquals(false,clickB.equals(clickA));
@@ -41,6 +41,7 @@ public class ClickShould {
                 "yyyy-MM-dd hh:mm:ss");
         parseDate = dateFormat.parse("2020-07-27 20:50:44");
         parseDate2 = dateFormat.parse("2020-07-23 20:56:10");
+        userID = new UserID();
 
         Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
         Click clickC = new Click(userID, Premium.PREMIUM, parseDate2);
@@ -54,11 +55,55 @@ public class ClickShould {
                 "yyyy-MM-dd hh:mm:ss");
         parseDate = dateFormat.parse("2020-07-27 20:50:44");
         parseDate2 = dateFormat.parse("2020-07-27 20:50:45");
+        userID = new UserID();
 
         Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
         Click clickC = new Click(userID, Premium.PREMIUM, parseDate2);
 
         assertEquals(false,clickC.differenceGreaterFifteenSeconds(clickB));
+
+    }
+    @Test
+    public void check_if_click_is_valid_when_userID_is_different() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd hh:mm:ss");
+        parseDate = dateFormat.parse("2020-07-27 20:50:44");
+        parseDate2 = dateFormat.parse("2020-07-27 20:50:45");
+        userID = new UserID();
+
+        Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
+        Click clickC = new Click(new UserID(), Premium.PREMIUM, parseDate2);
+
+        assertEquals(true,clickC.checkValidClick(clickB));
+
+    }
+    @Test
+    public void check_if_click_is_valid_when_userID_is_the_same() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd hh:mm:ss");
+        userID = new UserID();
+
+        parseDate = dateFormat.parse("2020-07-27 20:50:44");
+        parseDate2 = dateFormat.parse("2020-07-27 20:50:45");
+
+        Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
+        Click clickC = new Click(userID, Premium.PREMIUM, parseDate2);
+
+        assertEquals(true,clickC.checkValidClick(clickB));
+
+    }
+    @Test
+    public void check_if_click_is_not_valid_when_userID_is_the_same() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd hh:mm:ss");
+        parseDate = dateFormat.parse("2020-07-27 20:50:44");
+        parseDate2 = dateFormat.parse("2020-07-27 20:55:45");
+        userID = new UserID();
+
+        Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
+        Click clickC = new Click(userID, Premium.PREMIUM, parseDate2);
+
+        assertEquals(true,clickC.checkValidClick(clickB));
 
     }
 }

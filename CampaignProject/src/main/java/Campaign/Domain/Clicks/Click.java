@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Click {
     private int idClick;
     private final UserID userID;
-    private final Premium premium;
+    private Premium premium;
     private Date date;
 
 
@@ -20,11 +20,16 @@ public class Click {
 
     }
 
-    public double priceClick() {
-        return premium.price;
+    public double priceTopClick() {
+        return premium.priceTop;
+    }
+    public double priceStandardClick() {
+        return premium.priceStandard;
     }
 
     public boolean differenceGreaterFifteenSeconds(Click click) {
+
+
         long diff = date.getTime() - click.date.getTime();
         if (diff != 0) {
             diff = diff / 1000;
@@ -34,6 +39,10 @@ public class Click {
         }
         return true;
 
+    }
+
+    private boolean isSameUser(Click click) {
+        return this.userID.equals(click.userID);
     }
 
     @Override
@@ -50,4 +59,8 @@ public class Click {
     }
 
 
+    public boolean checkValidClick(Click click) {
+
+        return isSameUser(click)||differenceGreaterFifteenSeconds(click);
+    }
 }
