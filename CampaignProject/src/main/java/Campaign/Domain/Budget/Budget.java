@@ -4,6 +4,7 @@ import Campaign.Domain.Clicks.Click;
 
 public class Budget {
     private double budget;
+
     public Budget(double budget) {
         this.budget = budget;
     }

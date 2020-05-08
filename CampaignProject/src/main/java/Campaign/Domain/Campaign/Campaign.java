@@ -1,60 +1,23 @@
 package Campaign.Domain.Campaign;
 
-import Campaign.Domain.Budget.Budget;
+import Campaign.Domain.Ad.Ad;
 import Campaign.Domain.Clicks.Click;
-import Campaign.Domain.User.UserID;
-import Campaign.Exception.CampaignFinishedException;
-import Campaign.Exception.CampaignPauseException;
 
-import java.util.Objects;
 
-public class Campaign {
-    private int idCampaign;
-    private ClientID clientID;
-    private Budget budget;
-    private CampaignStatus campaignStatus;
+public interface Campaign {
+    void budgetReduction(Click click);
 
-    public Campaign(ClientID clientID, Budget budget) {
-        this.clientID = clientID;
-        this.budget = budget;
-        this.campaignStatus = CampaignStatus.ACTIVE;
-        this.idCampaign++;
+    void campaignFinishedOrPause();
 
-    }
+    void changeStatusToFinished();
 
-    public void budgetReduction(Click click) {
-        campaignFinishedOrPause();
-        budget.budgetReduction(click);
-        if(budget.budgetIsZero()){
-            changeStatusCampaign(CampaignStatus.FINISHED);
-        }
-    }
-    public void campaignFinishedOrPause(){
-        if(campaignStatus.equals(CampaignStatus.FINISHED)){
-            throw new CampaignFinishedException("This campaign is finished");
-        }
-        if(campaignStatus.equals(CampaignStatus.PAUSE)){
-            throw new CampaignPauseException("This campaign is pause");
-        }
+    void changeStatusToPause();
 
-    }
-    public void changeStatusCampaign(CampaignStatus campaignStatus){
-        if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
-            throw new CampaignFinishedException("This campaign is finished.");
-        }
-        this.campaignStatus = campaignStatus;
-    }
+    void changeStatusToActive();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Campaign campaign = (Campaign) o;
-        return idCampaign == campaign.idCampaign;
-    }
+    boolean statusIsFinished();
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idCampaign);
-    }
+    boolean statusIsPause();
+
+    void chargedFor(Ad ad);
 }

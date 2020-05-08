@@ -1,28 +1,39 @@
 package Campaign.Domain.Clicks;
 
 import Campaign.Domain.User.UserID;
-import Campaign.Service.TimeServer;
-
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
+
 public class Click {
-    private  int idClick;
+    private int idClick;
     private final UserID userID;
     private final Premium premium;
-    private Timestamp time;
-    private TimeServer timeServer = new TimeServer();
+    private Date date;
 
-    public Click(UserID userID, Premium premium) {
+
+    public Click(UserID userID, Premium premium, Date date) {
         this.userID = userID;
         this.premium = premium;
-        this.time = timeServer.getDate();
         this.idClick++;
+        this.date = date;
+
     }
 
     public double priceClick() {
         return premium.price;
+    }
+
+    public boolean differenceGreaterFifteenSeconds(Click click) {
+        long diff = date.getTime() - click.date.getTime();
+        if (diff != 0) {
+            diff = diff / 1000;
+        }
+        if (Math.abs(diff) <= 15) {
+            return false;
+        }
+        return true;
+
     }
 
     @Override
@@ -37,4 +48,6 @@ public class Click {
     public int hashCode() {
         return Objects.hash(idClick);
     }
+
+
 }
