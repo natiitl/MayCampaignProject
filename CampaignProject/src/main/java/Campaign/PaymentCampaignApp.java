@@ -1,6 +1,7 @@
 package Campaign;
 
 import Campaign.Domain.Campaign.Campaign;
+
 import Campaign.Domain.Clicks.ClickRepository;
 
 public class PaymentCampaignApp {

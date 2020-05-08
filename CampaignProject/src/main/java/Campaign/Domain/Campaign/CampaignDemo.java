@@ -1,5 +1,6 @@
 package Campaign.Domain.Campaign;
 
+import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Budget.BudgetStandard;
 
 import Campaign.Domain.Clicks.ClickRepository;
@@ -13,11 +14,13 @@ public class CampaignDemo implements Campaign {
     private int idCampaign;
     private CustomerID customerID;
     private CampaignStatus campaignStatus;
+    private Budget budget;
 
-    public CampaignDemo(CustomerID customerID, BudgetStandard budgetStandard) {
+    public CampaignDemo(CustomerID customerID,Budget budget) {
         this.customerID = customerID;
         this.campaignStatus = CampaignStatus.ACTIVE;
         this.idCampaign++;
+        this.budget = budget;
 
     }
 

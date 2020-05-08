@@ -1,6 +1,7 @@
 package UnitTest.Campaing.Campaign.Domain;
 
 import Campaign.Domain.Budget.*;
+import Campaign.Domain.Campaign.CampaignDemo;
 import Campaign.Domain.Campaign.CampaignStandard;
 import Campaign.Domain.Campaign.CampaignTop;
 import Campaign.Domain.Clicks.ClickRepository;
@@ -21,12 +22,14 @@ import static org.junit.Assert.assertEquals;
 public class PaymentCampaignShould {
     CampaignStandard campaignStandard;
     CampaignTop campaignTop;
+    CampaignDemo campaignDemo;
     Click click;
     Click clickA;
     ClickRepository clickRepository;
     PaymentCampaignApp paymentCampaignApp;
     Budget budgetStandard;
     Budget budgetTop;
+    Budget budgetDemo;
     UserID userID;
     Date date;
     Date date2;
@@ -54,6 +57,7 @@ public class PaymentCampaignShould {
 
         campaignStandard = new CampaignStandard(new CustomerID(), budgetStandard);
         campaignTop = new CampaignTop(new CustomerID(), budgetTop);
+        campaignDemo = new CampaignDemo(new CustomerID(),budgetDemo);
         paymentCampaignApp = new PaymentCampaignApp();
 
     }
@@ -80,6 +84,11 @@ public class PaymentCampaignShould {
         assertEquals("8,40", budgetTop.toString());
     }
 
+    @Test
+    public void check_that_no_charge_is_made_in_demo_campaigns(){
+        paymentCampaignApp.chargedFor(campaignDemo, clickRepository);
 
+        assertEquals("9,00", budgetTop.toString());
+    }
 
 }
