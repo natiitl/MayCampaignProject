@@ -1,10 +1,10 @@
 package UnitTest.Campaing.Campaign.Domain;
 
-import Campaign.Domain.Ad.Ad;
 import Campaign.Domain.Budget.BudgetStandard;
 import Campaign.Domain.Budget.BudgetTop;
 import Campaign.Domain.Campaign.CampaignStandard;
 import Campaign.Domain.Campaign.CampaignTop;
+import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.Premium;
@@ -18,18 +18,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PaymentCampaignShould {
     CampaignStandard campaignStandard;
     CampaignTop campaignTop;
+    Click click;
     Click clickA;
+    ClickRepository clickRepository;
     PaymentCampaign paymentCampaign;
     BudgetStandard budgetStandard;
     BudgetTop budgetTop;
     UserID userID;
     Date date;
     Date date2;
+
 
 
     @BeforeEach
@@ -42,65 +44,38 @@ public class PaymentCampaignShould {
 
         userID = new UserID();
         clickA = new Click(userID, Premium.PREMIUM, date);
+        clickRepository = new ClickRepository();
+        clickRepository.add(clickA);
+        click = new Click(new UserID(), Premium.NO_PREMIUM, date2);
+        clickRepository.add(click);
         budgetStandard = new BudgetStandard(9);
         budgetTop = new BudgetTop(9);
         campaignStandard = new CampaignStandard(new CustomerID(), budgetStandard);
         campaignTop = new CampaignTop(new CustomerID(), budgetTop);
         paymentCampaign = new PaymentCampaign();
-    }
 
-
-
-    @Test
-    public void check_charge_two_clicks_premiums_at_one_campaign() {
-        Click click = new Click(new UserID(), Premium.PREMIUM, date);
-
-        paymentCampaign.chargedForOneClick(campaignStandard, click);
-        paymentCampaign.chargedForOneClick(campaignStandard, click);
-
-        assertEquals("8,90", budgetStandard.toString());
     }
 
     @Test
-    public void check_charge_one_clicks_NO_premium_at_oneCampaign() {
-        Click click = new Click(new UserID(), Premium.NO_PREMIUM, date);
+    public void check_charge_two_clicks_list_at_one_campaign_Standard() {
+        paymentCampaign.chargedFor(campaignStandard, clickRepository);
 
-        paymentCampaign.chargedForOneClick(campaignStandard, click);
-
-        assertEquals("8,99", budgetStandard.toString());
+        assertEquals("8,94", budgetStandard.toString());
     }
 
     @Test
-    public void check_charge_two_clicks_NO_premium_at_campaign_for_ad() {
-        Click click = new Click(new UserID(), Premium.NO_PREMIUM, date);
-        Click click2 = new Click(new UserID(), Premium.NO_PREMIUM, date2);
-        Ad ad = new Ad();
+    public void check_charge_one_click_list_at_one_campaign_top() {
+        paymentCampaign.chargedFor(campaignTop, clickRepository);
 
-        ad.addClick(click);
-        ad.addClick(click2);
-
-        paymentCampaign.chargedFor(campaignStandard,ad);
-
-        assertEquals("8,98", budgetStandard.toString());
-
-    }
-    @Test
-    public void check_charge_two_clicks_premiums_at_one_campaign_top() {
-        Click click = new Click(new UserID(), Premium.PREMIUM, date);
-
-        paymentCampaign.chargedForOneClick(campaignTop, click);
-        paymentCampaign.chargedForOneClick(campaignTop, click);
-
-        assertEquals("8,60", budgetTop.toString());
+        assertEquals("8,70", budgetTop.toString());
     }
 
     @Test
-    public void check_charge_one_clicks_NO_premium_at_one_Campaign_yop() {
-        Click click = new Click(new UserID(), Premium.NO_PREMIUM, date);
+    public void check_charge_two_clicks_list__at_one_Campaign_top() {
+        paymentCampaign.chargedFor(campaignTop, clickRepository);
+        paymentCampaign.chargedFor(campaignTop, clickRepository);
 
-        paymentCampaign.chargedForOneClick(campaignTop, click);
-
-        assertEquals("8,90", budgetTop.toString());
+        assertEquals("8,40", budgetTop.toString());
     }
 
 

@@ -1,8 +1,9 @@
 package Campaign.Domain.Campaign;
 
-import Campaign.Domain.Ad.Ad;
+
 import Campaign.Domain.Budget.BudgetTop;
 import Campaign.Domain.Clicks.Click;
+import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Exception.CampaignFinishedException;
 import Campaign.Exception.CampaignPauseException;
@@ -23,10 +24,11 @@ public class CampaignTop implements Campaign {
 
     }
 
+
     @Override
-    public void chargedFor(Click click) {
+    public void chargedFor(ClickRepository clickRepository) {
         campaignFinishedOrPause();
-        budgetTop.chargedFor(click);
+        budgetTop.chargedFor(clickRepository);
         if (budgetTop.budgetIsZero()) {
             changeStatusToFinished();
         }
@@ -69,11 +71,6 @@ public class CampaignTop implements Campaign {
             throw new CampaignFinishedException("This campaign is finished.");
         }
         this.campaignStatus = CampaignStatus.ACTIVE;
-    }
-
-    @Override
-    public void chargedFor(Ad ad) {
-        ad.chargedAt(budgetTop);
     }
 
     @Override

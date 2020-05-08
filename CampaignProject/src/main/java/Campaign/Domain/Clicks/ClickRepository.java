@@ -28,11 +28,6 @@ public class ClickRepository {
        return clickList.get(clickList.size()-1).differenceGreaterFifteenSeconds(newClick);
 
     }
-    public void chargedIn(Budget budget) {
-        for (Click click:clickList) {
-            budget.chargedFor(click);
-        }
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -48,4 +43,18 @@ public class ClickRepository {
     }
 
 
+    public double priceStandardClicks() {
+        double price=0;
+        for (Click click:clickList) {
+            price+=click.priceStandardClick();
+        }
+        return price;
+    }
+    public double priceTopClicks() {
+        double price=0;
+        for (Click click:clickList) {
+            price+=click.priceTopClick();
+        }
+        return price;
+    }
 }

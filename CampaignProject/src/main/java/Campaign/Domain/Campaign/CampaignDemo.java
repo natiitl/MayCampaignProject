@@ -1,8 +1,8 @@
 package Campaign.Domain.Campaign;
 
-import Campaign.Domain.Ad.Ad;
 import Campaign.Domain.Budget.BudgetStandard;
-import Campaign.Domain.Clicks.Click;
+
+import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Exception.CampaignFinishedException;
 import Campaign.Exception.CampaignPauseException;
@@ -21,9 +21,10 @@ public class CampaignDemo implements Campaign {
 
     }
 
+
     @Override
-    public void chargedFor(Click click) {
-        campaignFinishedOrPause();
+    public void chargedFor(ClickRepository clickRepository) {
+
     }
 
     @Override
@@ -71,10 +72,6 @@ public class CampaignDemo implements Campaign {
         return campaignStatus.equals(CampaignStatus.PAUSE);
     }
 
-    @Override
-    public void chargedFor(Ad ad) {
-
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -34,18 +34,5 @@ public class ClickRepositoryShould {
     }
 
 
-    @Test
-    public void check_charge_two_clicks_at_budget() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd hh:mm:ss");
-        Date parseDate = dateFormat.parse("2020-07-27 20:50:44");
-        Date parseDate2 = dateFormat.parse("2020-07-28 20:50:45");
-        ClickRepository clickRepository = new ClickRepository();
-        clickRepository.add(new Click(new UserID(), Premium.NO_PREMIUM, parseDate));
-        clickRepository.add(new Click(new UserID(), Premium.PREMIUM, parseDate2));
-        BudgetStandard budgetStandard = new BudgetStandard(1);
-        clickRepository.chargedIn(budgetStandard);
 
-        assertEquals("0,94", budgetStandard.toString());
-    }
 }

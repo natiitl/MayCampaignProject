@@ -1,6 +1,7 @@
 package Campaign.Domain.Budget;
 
 import Campaign.Domain.Clicks.Click;
+import Campaign.Domain.Clicks.ClickRepository;
 
 public class BudgetTop implements Budget {
     private double budget;
@@ -9,10 +10,8 @@ public class BudgetTop implements Budget {
         this.budget = budget;
     }
 
-    @Override
-    public void chargedFor(Click click) {
-
-        this.budget -= click.priceTopClick();
+    public void chargedFor(ClickRepository clickRepository) {
+        this.budget -= clickRepository.priceTopClicks();
 
     }
 

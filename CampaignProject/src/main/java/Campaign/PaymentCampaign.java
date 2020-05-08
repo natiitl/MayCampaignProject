@@ -1,17 +1,13 @@
 package Campaign;
 
-import Campaign.Domain.Ad.Ad;
 import Campaign.Domain.Campaign.Campaign;
-import Campaign.Domain.Campaign.CampaignStandard;
 import Campaign.Domain.Clicks.Click;
+import Campaign.Domain.Clicks.ClickRepository;
 
 public class PaymentCampaign {
 
-    public void chargedForOneClick(Campaign campaign, Click click) {
-        campaign.chargedFor(click);
+    public void chargedFor(Campaign campaign, ClickRepository clickRepository) {
+        campaign.chargedFor(clickRepository);
     }
 
-    public void chargedFor(CampaignStandard campaignStandard, Ad ad){
-        campaignStandard.chargedFor(ad);
-    }
 }
