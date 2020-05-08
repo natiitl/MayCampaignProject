@@ -4,6 +4,7 @@ import Campaign.Domain.Clicks.ClickRepository;
 
 
 public interface Campaign {
+
     void chargedFor(ClickRepository clickRepository);
 
     void campaignFinishedOrPause();

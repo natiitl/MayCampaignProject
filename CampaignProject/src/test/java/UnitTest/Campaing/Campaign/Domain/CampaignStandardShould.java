@@ -1,6 +1,9 @@
 package UnitTest.Campaing.Campaign.Domain;
 
+import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Budget.BudgetStandard;
+import Campaign.Domain.Budget.BudgetType;
+import Campaign.Domain.Budget.FactoryBudget;
 import Campaign.Domain.Campaign.CampaignStandard;
 import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
@@ -16,19 +19,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CampaignStandardShould {
     UserID userID;
     CustomerID customerID;
-    BudgetStandard budgetStandard;
+    Budget budgetStandard;
     CampaignStandard campaignStandardA;
-
-    @Mock
-    ClickRepository clickRepository;
-
 
 
     @BeforeEach
     public void init() {
         userID = new UserID();
         customerID = new CustomerID();
-        budgetStandard = new BudgetStandard(9);
+        budgetStandard = FactoryBudget.getBudget(BudgetType.STANDARD);
         campaignStandardA = new CampaignStandard(customerID, budgetStandard);
     }
 

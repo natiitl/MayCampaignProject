@@ -1,5 +1,6 @@
 package Campaign.Domain.Campaign;
 
+import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Budget.BudgetStandard;
 import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
@@ -11,16 +12,17 @@ import java.util.Objects;
 public class CampaignStandard implements Campaign {
     private int idCampaign;
     private CustomerID customerID;
-    private BudgetStandard budgetStandard;
+    private Budget budgetStandard;
     private CampaignStatus campaignStatus;
 
-    public CampaignStandard(CustomerID customerID, BudgetStandard budgetStandard) {
+    public CampaignStandard(CustomerID customerID, Budget budgetStandard) {
         this.customerID = customerID;
         this.budgetStandard = budgetStandard;
         this.campaignStatus = CampaignStatus.ACTIVE;
         this.idCampaign++;
 
     }
+
 
     @Override
     public void chargedFor(ClickRepository clickRepository) {
@@ -69,6 +71,7 @@ public class CampaignStandard implements Campaign {
         }
         this.campaignStatus = CampaignStatus.ACTIVE;
     }
+
 
     @Override
     public boolean statusIsPause() {

@@ -1,7 +1,5 @@
 package Campaign.Domain.Clicks;
 
-import Campaign.Domain.Budget.Budget;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

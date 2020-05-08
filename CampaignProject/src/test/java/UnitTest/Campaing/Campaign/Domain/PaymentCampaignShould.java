@@ -1,14 +1,13 @@
 package UnitTest.Campaing.Campaign.Domain;
 
-import Campaign.Domain.Budget.BudgetStandard;
-import Campaign.Domain.Budget.BudgetTop;
+import Campaign.Domain.Budget.*;
 import Campaign.Domain.Campaign.CampaignStandard;
 import Campaign.Domain.Campaign.CampaignTop;
 import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.Premium;
-import Campaign.PaymentCampaign;
+import Campaign.PaymentCampaignApp;
 import Campaign.Domain.User.UserID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,9 +24,9 @@ public class PaymentCampaignShould {
     Click click;
     Click clickA;
     ClickRepository clickRepository;
-    PaymentCampaign paymentCampaign;
-    BudgetStandard budgetStandard;
-    BudgetTop budgetTop;
+    PaymentCampaignApp paymentCampaignApp;
+    Budget budgetStandard;
+    Budget budgetTop;
     UserID userID;
     Date date;
     Date date2;
@@ -48,32 +47,35 @@ public class PaymentCampaignShould {
         clickRepository.add(clickA);
         click = new Click(new UserID(), Premium.NO_PREMIUM, date2);
         clickRepository.add(click);
-        budgetStandard = new BudgetStandard(9);
-        budgetTop = new BudgetTop(9);
+        budgetStandard = FactoryBudget.getBudget(BudgetType.STANDARD);
+        budgetStandard.setBudget(9);
+        budgetTop = FactoryBudget.getBudget(BudgetType.TOP);
+        budgetTop.setBudget(9);
+
         campaignStandard = new CampaignStandard(new CustomerID(), budgetStandard);
         campaignTop = new CampaignTop(new CustomerID(), budgetTop);
-        paymentCampaign = new PaymentCampaign();
+        paymentCampaignApp = new PaymentCampaignApp();
 
     }
 
     @Test
     public void check_charge_two_clicks_list_at_one_campaign_Standard() {
-        paymentCampaign.chargedFor(campaignStandard, clickRepository);
+        paymentCampaignApp.chargedFor(campaignStandard, clickRepository);
 
         assertEquals("8,94", budgetStandard.toString());
     }
 
     @Test
     public void check_charge_one_click_list_at_one_campaign_top() {
-        paymentCampaign.chargedFor(campaignTop, clickRepository);
+        paymentCampaignApp.chargedFor(campaignTop, clickRepository);
 
         assertEquals("8,70", budgetTop.toString());
     }
 
     @Test
     public void check_charge_two_clicks_list__at_one_Campaign_top() {
-        paymentCampaign.chargedFor(campaignTop, clickRepository);
-        paymentCampaign.chargedFor(campaignTop, clickRepository);
+        paymentCampaignApp.chargedFor(campaignTop, clickRepository);
+        paymentCampaignApp.chargedFor(campaignTop, clickRepository);
 
         assertEquals("8,40", budgetTop.toString());
     }

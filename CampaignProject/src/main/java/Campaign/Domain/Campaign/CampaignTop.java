@@ -1,6 +1,7 @@
 package Campaign.Domain.Campaign;
 
 
+import Campaign.Domain.Budget.Budget;
 import Campaign.Domain.Budget.BudgetTop;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.ClickRepository;
@@ -13,10 +14,10 @@ import java.util.Objects;
 public class CampaignTop implements Campaign {
     private int idCampaign;
     private CustomerID customerID;
-    private BudgetTop budgetTop;
+    private Budget budgetTop;
     private CampaignStatus campaignStatus;
 
-    public CampaignTop(CustomerID customerID, BudgetTop budgetTop) {
+    public CampaignTop(CustomerID customerID, Budget budgetTop) {
         this.customerID = customerID;
         this.budgetTop = budgetTop;
         this.campaignStatus = CampaignStatus.ACTIVE;

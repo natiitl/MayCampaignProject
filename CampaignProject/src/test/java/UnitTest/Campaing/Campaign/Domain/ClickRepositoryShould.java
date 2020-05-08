@@ -1,6 +1,5 @@
 package UnitTest.Campaing.Campaign.Domain;
 
-import Campaign.Domain.Budget.BudgetStandard;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Clicks.Premium;

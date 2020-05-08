@@ -1,12 +1,20 @@
 package Campaign.Domain.Budget;
 
-import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.ClickRepository;
 
-public interface Budget {
+public abstract class Budget {
+    private double budget;
 
-    void chargedFor(ClickRepository clickRepository);
+    public double getBudget() {
+        return budget;
+    }
 
-    boolean budgetIsZero();
+    public void setBudget(double budget) {
+        this.budget = budget;
+    }
 
+
+    public abstract void chargedFor(ClickRepository clickRepository);
+
+    public abstract boolean budgetIsZero();
 }

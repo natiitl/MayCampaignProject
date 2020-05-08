@@ -1,7 +1,6 @@
 package AcceptanceTest;
 
-import Campaign.Domain.Budget.BudgetStandard;
-import Campaign.Domain.Budget.BudgetTop;
+import Campaign.Domain.Budget.*;
 import Campaign.Domain.Campaign.CampaignStandard;
 import Campaign.*;
 import Campaign.Domain.Campaign.CampaignTop;
@@ -37,14 +36,17 @@ public class ChargeForClickCampaignStandardAcceptanceShould {
         clickRepository.add(clickPremium);
         clickRepository.add(clickNoPremium);
 
-        BudgetStandard budgetStandard = new BudgetStandard(2);
-        BudgetTop budgetTop = new BudgetTop(2);
+        Budget budgetStandard = FactoryBudget.getBudget(BudgetType.STANDARD);
+        budgetStandard.setBudget(2);
+        Budget budgetTop = FactoryBudget.getBudget(BudgetType.TOP);
+        budgetTop.setBudget(2);
+
         CampaignStandard campaignStandard = new CampaignStandard(customerID, budgetStandard);
         CampaignTop campaignTop = new CampaignTop(customerID,budgetTop);
 
-        PaymentCampaign paymentCampaign = new PaymentCampaign();
-        paymentCampaign.chargedFor(campaignStandard,clickRepository);
-        paymentCampaign.chargedFor(campaignTop,clickRepository);
+        PaymentCampaignApp paymentCampaignApp = new PaymentCampaignApp();
+        paymentCampaignApp.chargedFor(campaignStandard,clickRepository);
+        paymentCampaignApp.chargedFor(campaignTop,clickRepository);
 
 
         assertEquals("1,94", budgetStandard.toString());

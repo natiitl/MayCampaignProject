@@ -28,6 +28,8 @@ public class Click {
     }
 
     public boolean differenceGreaterFifteenSeconds(Click click) {
+
+
         long diff = date.getTime() - click.date.getTime();
         if (diff != 0) {
             diff = diff / 1000;
@@ -38,9 +40,9 @@ public class Click {
         return true;
 
     }
-    public boolean isPremium(){
 
-        return this.premium.equals(Premium.PREMIUM);
+    private boolean isSameUser(Click click) {
+        return this.userID.equals(click.userID);
     }
 
     @Override
@@ -57,4 +59,8 @@ public class Click {
     }
 
 
+    public boolean checkValidClick(Click click) {
+
+        return isSameUser(click)||differenceGreaterFifteenSeconds(click);
+    }
 }
