@@ -62,7 +62,8 @@ public class PaymentCampaignApp {
 
         campaignTop.chargedFor(clickRepository);
 
-        System.out.println("After charged two clicks, one premium(0,1€) and one standard(0,2€), the budget is " + budgetTop.toString()+ "€");
+        System.out.println("After charged two clicks, one premium(0,1€) and one standard(0,2€), the budget is " + budgetTop
+                .toString()+ "€");
     }
 
 
