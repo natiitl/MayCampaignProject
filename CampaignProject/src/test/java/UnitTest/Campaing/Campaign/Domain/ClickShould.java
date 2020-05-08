@@ -3,6 +3,7 @@ package UnitTest.Campaing.Campaign.Domain;
 import Campaign.Domain.Clicks.Click;
 import Campaign.Domain.Clicks.Premium;
 import Campaign.Domain.User.UserID;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import java.text.ParseException;
@@ -17,7 +18,7 @@ public class ClickShould {
     Date parseDate;
     Date parseDate2;
 
-    @BeforeEach
+    @Before
     public void init() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd hh:mm:ss");
@@ -89,7 +90,7 @@ public class ClickShould {
         Click clickB = new Click(userID, Premium.PREMIUM, parseDate);
         Click clickC = new Click(userID, Premium.PREMIUM, parseDate2);
 
-        assertEquals(true,clickC.checkValidClick(clickB));
+        assertEquals(false,clickC.checkValidClick(clickB));
 
     }
     @Test

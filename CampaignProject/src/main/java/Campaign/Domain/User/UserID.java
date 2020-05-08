@@ -6,7 +6,7 @@ public class UserID {
     private int idUser;
 
     public UserID() {
-        this.idUser++;
+        this.idUser = (int)( Math.random()*10000);
     }
 
     @Override

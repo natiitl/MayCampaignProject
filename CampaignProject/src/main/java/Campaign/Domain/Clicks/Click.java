@@ -15,7 +15,7 @@ public class Click {
     public Click(UserID userID, Premium premium, Date date) {
         this.userID = userID;
         this.premium = premium;
-        this.idClick++;
+        this.idClick = (int)( Math.random()*10000);
         this.date = date;
 
     }
@@ -61,6 +61,6 @@ public class Click {
 
     public boolean checkValidClick(Click click) {
 
-        return isSameUser(click)||differenceGreaterFifteenSeconds(click);
+        return !isSameUser(click)||differenceGreaterFifteenSeconds(click);
     }
 }

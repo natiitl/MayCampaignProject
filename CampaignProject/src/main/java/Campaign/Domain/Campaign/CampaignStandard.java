@@ -19,7 +19,7 @@ public class CampaignStandard implements Campaign {
         this.customerID = customerID;
         this.budgetStandard = budgetStandard;
         this.campaignStatus = CampaignStatus.ACTIVE;
-        this.idCampaign++;
+        this.idCampaign = (int)( Math.random()*10000);
 
     }
 
@@ -47,6 +47,11 @@ public class CampaignStandard implements Campaign {
     public boolean statusIsFinished() {
         return campaignStatus.equals(CampaignStatus.FINISHED);
     }
+    @Override
+    public boolean statusIsActive() {
+        return campaignStatus.equals(CampaignStatus.ACTIVE);
+    }
+
 
     @Override
     public void changeStatusToFinished() {

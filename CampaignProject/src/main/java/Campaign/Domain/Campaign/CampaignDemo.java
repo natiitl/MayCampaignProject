@@ -42,6 +42,11 @@ public class CampaignDemo implements Campaign {
     }
 
     @Override
+    public boolean statusIsActive() {
+        return false;
+    }
+
+    @Override
     public boolean statusIsFinished() {
         return campaignStatus.equals(CampaignStatus.FINISHED);
     }

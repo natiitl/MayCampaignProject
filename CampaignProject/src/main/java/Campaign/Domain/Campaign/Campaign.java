@@ -9,6 +9,8 @@ public interface Campaign {
 
     void campaignFinishedOrPause();
 
+    boolean statusIsActive();
+
     void changeStatusToFinished();
 
     void changeStatusToPause();
