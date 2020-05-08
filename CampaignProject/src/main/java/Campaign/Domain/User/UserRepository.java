@@ -13,19 +13,18 @@ public class UserRepository {
         this.userIDList = new ArrayList<>();
     }
 
-    public void addUser(UserID userID){
-        if(!userIDList.contains(userID)) {
+    public void addUser(UserID userID) {
+        if (!userIDList.contains(userID)) {
             userIDList.add(userID);
         }
     }
 
     public boolean isMyClick(Click click, Date date) {
-        for (UserID userID:userIDList) {
-            if ( click.isSameUserID(userID)){
+        for (UserID userID : userIDList) {
+            if (click.isSameUserID(userID) && click.dateIsEarlier(date)) {
                 return true;
             }
-            
-        }                return true;
-
+        }
+        return false;
     }
 }
