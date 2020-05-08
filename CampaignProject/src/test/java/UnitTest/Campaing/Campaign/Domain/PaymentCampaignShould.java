@@ -48,23 +48,7 @@ public class PaymentCampaignShould {
         paymentCampaign = new PaymentCampaign();
     }
 
-    @Test
-    public void raise_error_when_campaign_status_is_finished() {
-        Click click = new Click(new UserID(), Premium.PREMIUM, date);
 
-        campaign.changeStatusCampaign(CampaignStatus.FINISHED);
-
-        assertThrows(CampaignFinishedException.class, () -> paymentCampaign.chargedForOneClick(campaign, click));
-    }
-
-    @Test
-    public void raise_error_when_campaign_status_is_pause() {
-        Click click = new Click(new UserID(), Premium.PREMIUM, date);
-
-        campaign.changeStatusCampaign(CampaignStatus.PAUSE);
-
-        assertThrows(CampaignPauseException.class, () -> paymentCampaign.chargedForOneClick(campaign, click));
-    }
 
     @Test
     public void check_charge_two_clicks_premiums_at_one_campaign() {

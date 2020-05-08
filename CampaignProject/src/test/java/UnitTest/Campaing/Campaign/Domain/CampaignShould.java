@@ -44,10 +44,11 @@ public class CampaignShould {
     @Test
     public void raise_error_when_you_want_to_change_the_status_when_it_is_already_finished() {
         Campaign campaign = new Campaign(customerID, budget);
-        campaign.changeStatusCampaign(CampaignStatus.FINISHED);
+        campaign.changeStatusToFinished();
 
-        assertThrows(CampaignFinishedException.class, () -> campaign.changeStatusCampaign(CampaignStatus.ACTIVE));
+        assertThrows(CampaignFinishedException.class, () -> campaign.changeStatusToActive());
     }
+
 
 }
 

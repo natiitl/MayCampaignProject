@@ -27,7 +27,7 @@ public class Campaign {
         campaignFinishedOrPause();
         budget.budgetReduction(click);
         if(budget.budgetIsZero()){
-            changeStatusCampaign(CampaignStatus.FINISHED);
+            changeStatusToFinished();
         }
     }
     public void campaignFinishedOrPause(){
@@ -39,11 +39,30 @@ public class Campaign {
         }
 
     }
-    public void changeStatusCampaign(CampaignStatus campaignStatus){
+    /*public void changeStatusCampaign(CampaignStatus campaignStatus){
         if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
             throw new CampaignFinishedException("This campaign is finished.");
         }
         this.campaignStatus = campaignStatus;
+    }*/
+
+    public void changeStatusToFinished(){
+        if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
+            throw new CampaignFinishedException("This campaign is finished.");
+        }
+        this.campaignStatus = CampaignStatus.FINISHED;
+    }
+    public void changeStatusToPause(){
+        if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
+            throw new CampaignFinishedException("This campaign is finished.");
+        }
+        this.campaignStatus = CampaignStatus.PAUSE;
+    }
+    public void changeStatusToActive(){
+        if(this.campaignStatus.equals(CampaignStatus.FINISHED)){
+            throw new CampaignFinishedException("This campaign is finished.");
+        }
+        this.campaignStatus = CampaignStatus.ACTIVE;
     }
     @Override
     public boolean equals(Object o) {
