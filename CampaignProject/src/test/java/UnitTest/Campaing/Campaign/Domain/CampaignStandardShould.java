@@ -9,6 +9,7 @@ import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Clicks.Premium;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Domain.User.UserID;
+import Campaign.Domain.User.UserRepository;
 import Campaign.Exception.CampaignFinishedException;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +53,28 @@ public class CampaignStandardShould {
         clickRepository.add(clickPremium);
         campaignStandardA.chargedFor(clickRepository);
         Assertions.assertEquals("1,99",budgetStandard.toString());
+
+    }
+
+    @Test
+    public void test() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd hh:mm:ss");
+        Date date = dateFormat.parse("2020-07-27 20:50:44");
+        Date date2 = dateFormat.parse("2020-07-27 20:52:45");
+        ClickRepository clickRepository = new ClickRepository();
+        UserRepository userRepository = new UserRepository();
+        userRepository.addUser(userID);
+        budgetStandard.setBudget(2);
+        Click clickPremium = new Click(userID, Premium.PREMIUM, date);
+        Click clickNoPremium = new Click(userID, Premium.NO_PREMIUM, date);
+        clickRepository.add(clickNoPremium);
+        clickRepository.add(clickPremium);
+        campaignStandardA.chargedFor(clickRepository);
+        ClickRepository clickRepositoryFraudulent = campaignStandardA.findFraudulentClicks(userRepository,date);
+        campaignStandardA.refundFor(clickRepositoryFraudulent);
+
+        Assertions.assertEquals("2,00",budgetStandard.toString());
 
     }
 

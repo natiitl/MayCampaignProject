@@ -28,6 +28,11 @@ public class BudgetDemo extends Budget {
     }
 
     @Override
+    public void refundFor(ClickRepository clickRepository) {
+
+    }
+
+    @Override
     public String toString() {
         return String.format("%.2f", getBudget());
     }

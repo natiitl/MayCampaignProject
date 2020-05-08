@@ -105,4 +105,13 @@ public ClickRepository findFraudulentClicks(UserRepository userRepository, Date 
     public int hashCode() {
         return Objects.hash(idCampaign);
     }
+
+    public void refundFor(ClickRepository clickRepositoryFraudulent) {
+        campaignFinishedOrPause();
+        budgetStandard.refundFor(clickRepository);
+        if (budgetStandard.budgetIsZero()) {
+            changeStatusToFinished();
+        }
+        this.clickRepository= clickRepository;
+    }
 }

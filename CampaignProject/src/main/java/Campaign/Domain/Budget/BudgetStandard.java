@@ -16,6 +16,13 @@ public class BudgetStandard extends Budget {
     }
 
     @Override
+    public void refundFor(ClickRepository clickRepository) {
+        double budget=getBudget();
+        budget+= clickRepository.priceStandardClicks();
+        setBudget(budget);
+    }
+
+    @Override
     public String toString() {
         return String.format("%.2f", getBudget());
     }

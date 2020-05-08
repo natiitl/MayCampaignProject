@@ -17,4 +17,6 @@ public abstract class Budget {
     public abstract void chargedFor(ClickRepository clickRepository);
 
     public abstract boolean budgetIsZero();
+
+    public abstract void refundFor(ClickRepository clickRepository);
 }
