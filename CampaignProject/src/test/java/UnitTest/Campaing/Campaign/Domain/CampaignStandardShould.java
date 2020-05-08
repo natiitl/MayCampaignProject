@@ -1,11 +1,9 @@
 package UnitTest.Campaing.Campaign.Domain;
 
 import Campaign.Domain.Budget.Budget;
-import Campaign.Domain.Budget.BudgetStandard;
 import Campaign.Domain.Budget.BudgetType;
 import Campaign.Domain.Budget.FactoryBudget;
 import Campaign.Domain.Campaign.CampaignStandard;
-import Campaign.Domain.Clicks.ClickRepository;
 import Campaign.Domain.Client.CustomerID;
 import Campaign.Domain.User.UserID;
 import Campaign.Exception.CampaignFinishedException;

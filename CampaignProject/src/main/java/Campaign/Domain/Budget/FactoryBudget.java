@@ -8,6 +8,9 @@ public class FactoryBudget {
         if (budgetType.equals(BudgetType.STANDARD)) {
             return new BudgetStandard();
         }
+        if (budgetType.equals(BudgetType.DEMO)) {
+            return new BudgetDemo();
+        }
         return null;
     }
 }

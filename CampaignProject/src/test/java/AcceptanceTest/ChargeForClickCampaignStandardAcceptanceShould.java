@@ -43,10 +43,8 @@ public class ChargeForClickCampaignStandardAcceptanceShould {
 
         CampaignStandard campaignStandard = new CampaignStandard(customerID, budgetStandard);
         CampaignTop campaignTop = new CampaignTop(customerID,budgetTop);
-
-        PaymentCampaignApp paymentCampaignApp = new PaymentCampaignApp();
-        paymentCampaignApp.chargedFor(campaignStandard,clickRepository);
-        paymentCampaignApp.chargedFor(campaignTop,clickRepository);
+        campaignStandard.chargedFor(clickRepository);
+        campaignTop.chargedFor(clickRepository);
 
 
         assertEquals("1,94", budgetStandard.toString());
