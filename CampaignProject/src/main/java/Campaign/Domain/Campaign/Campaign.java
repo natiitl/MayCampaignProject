@@ -27,4 +27,5 @@ public interface Campaign {
 
     boolean statusIsPause();
 
+    void refundFor(ClickRepository clickRepositoryFraudulent);
 }

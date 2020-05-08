@@ -92,6 +92,11 @@ public class CampaignTop implements Campaign {
     }
 
     @Override
+    public void refundFor(ClickRepository clickRepositoryFraudulent) {
+
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -106,6 +106,7 @@ public ClickRepository findFraudulentClicks(UserRepository userRepository, Date 
         return Objects.hash(idCampaign);
     }
 
+    @Override
     public void refundFor(ClickRepository clickRepositoryFraudulent) {
         campaignFinishedOrPause();
         budgetStandard.refundFor(clickRepository);

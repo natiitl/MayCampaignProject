@@ -87,6 +87,11 @@ public class CampaignDemo implements Campaign {
         return campaignStatus.equals(CampaignStatus.PAUSE);
     }
 
+    @Override
+    public void refundFor(ClickRepository clickRepositoryFraudulent) {
+
+    }
+
 
     @Override
     public boolean equals(Object o) {

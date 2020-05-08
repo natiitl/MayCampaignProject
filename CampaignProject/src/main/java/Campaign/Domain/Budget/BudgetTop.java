@@ -18,9 +18,14 @@ public class BudgetTop extends Budget {
 
     public void chargedFor(ClickRepository clickRepository) {
          double budget = getBudget();
-        budget -= clickRepository.priceTopClicks();
+             budget -= clickRepository.priceTopClicks();
+
         setBudget(budget);
 
+    }
+
+    private boolean isMoreAt5PercentToInitial(double priceTopClicks) {
+        return getBudgetInitial()*0.95 >=priceTopClicks;
     }
 
     public boolean budgetIsZero() {
@@ -30,7 +35,10 @@ public class BudgetTop extends Budget {
     @Override
     public void refundFor(ClickRepository clickRepository) {
         double budget=getBudget();
-        budget+= clickRepository.priceStandardClicks();
+        if(!isMoreAt5PercentToInitial(clickRepository.priceTopClicks())) {
+
+            budget += clickRepository.priceStandardClicks();
+        }
         setBudget(budget);
 
     }
